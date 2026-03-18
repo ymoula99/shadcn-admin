@@ -22,7 +22,7 @@ import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'Griffon Movers',
+    name: 'Griffon MOVERS',
     email: '',
     avatar: '/images/griffon-logo.png',
   },
