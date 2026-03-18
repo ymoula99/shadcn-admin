@@ -1,51 +1,44 @@
-'use client'
-
 import { useState } from 'react'
 import { type Table } from '@tanstack/react-table'
 import { AlertTriangle } from 'lucide-react'
 import { toast } from 'sonner'
-import { sleep } from '@/lib/utils'
+import { deleteTasks } from '@/lib/db'
+import type { Task } from '@/lib/db'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
+import { useTasks } from './tasks-provider'
 
-type TaskMultiDeleteDialogProps<TData> = {
+type Props = {
   open: boolean
   onOpenChange: (open: boolean) => void
-  table: Table<TData>
+  table: Table<Task>
 }
 
-const CONFIRM_WORD = 'DELETE'
+const CONFIRM_WORD = 'SUPPRIMER'
 
-export function TasksMultiDeleteDialog<TData>({
-  open,
-  onOpenChange,
-  table,
-}: TaskMultiDeleteDialogProps<TData>) {
+export function TasksMultiDeleteDialog({ open, onOpenChange, table }: Props) {
   const [value, setValue] = useState('')
-
+  const { refreshData } = useTasks()
   const selectedRows = table.getFilteredSelectedRowModel().rows
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (value.trim() !== CONFIRM_WORD) {
-      toast.error(`Please type "${CONFIRM_WORD}" to confirm.`)
+      toast.error(`Veuillez taper « ${CONFIRM_WORD} » pour confirmer.`)
       return
     }
-
-    onOpenChange(false)
-
-    toast.promise(sleep(2000), {
-      loading: 'Deleting tasks...',
-      success: () => {
-        setValue('')
-        table.resetRowSelection()
-        return `Deleted ${selectedRows.length} ${
-          selectedRows.length > 1 ? 'tasks' : 'task'
-        }`
-      },
-      error: 'Error',
-    })
+    try {
+      const ids = selectedRows.map((row) => (row.original as Task).id)
+      await deleteTasks(ids)
+      await refreshData()
+      setValue('')
+      table.resetRowSelection()
+      onOpenChange(false)
+      toast.success(`${ids.length} tâche(s) supprimée(s).`)
+    } catch {
+      toast.error('Erreur lors de la suppression.')
+    }
   }
 
   return (
@@ -60,35 +53,35 @@ export function TasksMultiDeleteDialog<TData>({
             className='me-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete {selectedRows.length}{' '}
-          {selectedRows.length > 1 ? 'tasks' : 'task'}
+          Supprimer {selectedRows.length} tâche(s)
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete the selected tasks? <br />
-            This action cannot be undone.
+            Êtes-vous sûr de vouloir supprimer les tâches sélectionnées ?{' '}
+            <br />
+            Cette action est irréversible.
           </p>
 
           <Label className='my-4 flex flex-col items-start gap-1.5'>
-            <span className=''>Confirm by typing "{CONFIRM_WORD}":</span>
+            <span>Tapez « {CONFIRM_WORD} » pour confirmer :</span>
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder={`Type "${CONFIRM_WORD}" to confirm.`}
+              placeholder={`Tapez « ${CONFIRM_WORD} »`}
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>Attention !</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              Cette opération ne peut pas être annulée.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      confirmText='Supprimer'
       destructive
     />
   )

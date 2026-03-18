@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { toast } from 'sonner'
+import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/stores/auth-store'
 import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
@@ -53,19 +54,14 @@ const queryClient = new QueryClient({
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
           const redirect = `${router.history.location.href}`
           router.navigate({ to: '/sign-in', search: { redirect } })
         }
         if (error.response?.status === 500) {
           toast.error('Internal Server Error!')
-          // Only navigate to error page in production to avoid disrupting HMR in development
           if (import.meta.env.PROD) {
             router.navigate({ to: '/500' })
           }
-        }
-        if (error.response?.status === 403) {
-          // router.navigate("/forbidden", { replace: true });
         }
       }
     },
@@ -86,6 +82,20 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+
+// Initialize Supabase auth state
+supabase.auth.onAuthStateChange((_event, session) => {
+  const { setUser, setLoading, loadMoverProfile } = useAuthStore.getState()
+  setUser(session?.user ?? null)
+  loadMoverProfile().finally(() => setLoading(false))
+})
+
+// Check initial session
+supabase.auth.getSession().then(({ data: { session } }) => {
+  const { setUser, setLoading, loadMoverProfile } = useAuthStore.getState()
+  setUser(session?.user ?? null)
+  loadMoverProfile().finally(() => setLoading(false))
+})
 
 // Render the app
 const rootElement = document.getElementById('root')!

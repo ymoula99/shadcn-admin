@@ -1,56 +1,41 @@
 import {
-  Construction,
   LayoutDashboard,
-  Monitor,
-  Bug,
-  ListTodo,
-  FileX,
-  HelpCircle,
-  Lock,
-  Bell,
-  Package,
-  Palette,
-  ServerOff,
-  Settings,
-  Wrench,
-  UserCog,
-  UserX,
   Users,
-  MessagesSquare,
-  ShieldCheck,
-  AudioWaveform,
+  ArrowLeftRight,
+  Settings,
+  UserCog,
+  Wrench,
+  Palette,
+  Bell,
+  Monitor,
   Command,
-  GalleryVerticalEnd,
+  HardHat,
+  ClipboardList,
+  ListChecks,
+  CheckSquare,
+  CalendarDays,
+  FileText,
+  BookOpen,
+  Plug,
 } from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
+    name: 'Griffon Movers',
+    email: '',
     avatar: '/avatars/shadcn.jpg',
   },
   teams: [
     {
-      name: 'Shadcn Admin',
+      name: 'Griffon Movers',
       logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
+      plan: 'Déménagement',
     },
   ],
   navGroups: [
     {
-      title: 'General',
+      title: 'Principal',
       items: [
         {
           title: 'Dashboard',
@@ -58,127 +43,71 @@ export const sidebarData: SidebarData = {
           icon: LayoutDashboard,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
-          title: 'Users',
-          url: '/users',
+          title: 'Contacts',
+          url: '/contacts',
           icon: Users,
         },
         {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
-            },
-            {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
-            },
-            {
-              title: 'User Management',
-              url: '/clerk/user-management',
-            },
-          ],
+          title: 'Transactions',
+          url: '/transactions',
+          icon: ArrowLeftRight,
+        },
+        {
+          title: 'Tâches',
+          url: '/tasks',
+          icon: CheckSquare,
+        },
+        {
+          title: 'Devis',
+          url: '/devis',
+          icon: FileText,
         },
       ],
     },
     {
-      title: 'Pages',
+      title: 'Exploitation',
       items: [
         {
-          title: 'Auth',
-          icon: ShieldCheck,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
+          title: 'Chantiers',
+          url: '/exploitation/chantiers',
+          icon: HardHat,
         },
         {
-          title: 'Errors',
-          icon: Bug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/errors/unauthorized',
-              icon: Lock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/errors/forbidden',
-              icon: UserX,
-            },
-            {
-              title: 'Not Found',
-              url: '/errors/not-found',
-              icon: FileX,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/errors/internal-server-error',
-              icon: ServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/errors/maintenance-error',
-              icon: Construction,
-            },
-          ],
+          title: 'Déménageurs',
+          url: '/exploitation/demenageurs',
+          icon: ClipboardList,
+        },
+        {
+          title: 'Checklist',
+          url: '/exploitation/taches',
+          icon: ListChecks,
+        },
+        {
+          title: 'Calendrier',
+          url: '/exploitation/calendrier',
+          icon: CalendarDays,
         },
       ],
     },
     {
-      title: 'Other',
+      title: 'Autre',
       items: [
         {
-          title: 'Settings',
+          title: 'Paramètres',
           icon: Settings,
           items: [
             {
-              title: 'Profile',
+              title: 'Profil',
               url: '/settings',
               icon: UserCog,
             },
             {
-              title: 'Account',
+              title: 'Compte',
               url: '/settings/account',
               icon: Wrench,
             },
             {
-              title: 'Appearance',
+              title: 'Apparence',
               url: '/settings/appearance',
               icon: Palette,
             },
@@ -188,16 +117,21 @@ export const sidebarData: SidebarData = {
               icon: Bell,
             },
             {
-              title: 'Display',
+              title: 'Affichage',
               url: '/settings/display',
               icon: Monitor,
             },
+            {
+              title: 'Catalogue',
+              url: '/catalogue',
+              icon: BookOpen,
+            },
+            {
+              title: 'Intégrations',
+              url: '/settings/integrations',
+              icon: Plug,
+            },
           ],
-        },
-        {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: HelpCircle,
         },
       ],
     },

@@ -1,53 +1,42 @@
 import { create } from 'zustand'
-import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
+import { supabase } from '@/lib/supabase'
+import { getMoverByUserId } from '@/lib/db'
+import type { Mover } from '@/lib/db'
+import type { User } from '@supabase/supabase-js'
 
-const ACCESS_TOKEN = 'thisisjustarandomstring'
-
-interface AuthUser {
-  accountNo: string
-  email: string
-  role: string[]
-  exp: number
+interface AuthStore {
+  user: User | null
+  mover: Mover | null
+  isMover: boolean
+  loading: boolean
+  setUser: (user: User | null) => void
+  setLoading: (loading: boolean) => void
+  loadMoverProfile: () => Promise<void>
+  signOut: () => Promise<void>
 }
 
-interface AuthState {
-  auth: {
-    user: AuthUser | null
-    setUser: (user: AuthUser | null) => void
-    accessToken: string
-    setAccessToken: (accessToken: string) => void
-    resetAccessToken: () => void
-    reset: () => void
-  }
-}
-
-export const useAuthStore = create<AuthState>()((set) => {
-  const cookieState = getCookie(ACCESS_TOKEN)
-  const initToken = cookieState ? JSON.parse(cookieState) : ''
-  return {
-    auth: {
-      user: null,
-      setUser: (user) =>
-        set((state) => ({ ...state, auth: { ...state.auth, user } })),
-      accessToken: initToken,
-      setAccessToken: (accessToken) =>
-        set((state) => {
-          setCookie(ACCESS_TOKEN, JSON.stringify(accessToken))
-          return { ...state, auth: { ...state.auth, accessToken } }
-        }),
-      resetAccessToken: () =>
-        set((state) => {
-          removeCookie(ACCESS_TOKEN)
-          return { ...state, auth: { ...state.auth, accessToken: '' } }
-        }),
-      reset: () =>
-        set((state) => {
-          removeCookie(ACCESS_TOKEN)
-          return {
-            ...state,
-            auth: { ...state.auth, user: null, accessToken: '' },
-          }
-        }),
-    },
-  }
-})
+export const useAuthStore = create<AuthStore>((set, get) => ({
+  user: null,
+  mover: null,
+  isMover: false,
+  loading: true,
+  setUser: (user) => set({ user }),
+  setLoading: (loading) => set({ loading }),
+  loadMoverProfile: async () => {
+    const { user } = get()
+    if (!user) {
+      set({ mover: null, isMover: false })
+      return
+    }
+    try {
+      const mover = await getMoverByUserId(user.id)
+      set({ mover, isMover: !!mover })
+    } catch {
+      set({ mover: null, isMover: false })
+    }
+  },
+  signOut: async () => {
+    await supabase.auth.signOut()
+    set({ user: null, mover: null, isMover: false })
+  },
+}))

@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import type { Task } from '@/lib/db'
 import { cn } from '@/lib/utils'
 import { useTableUrlState } from '@/hooks/use-table-url-state'
 import {
@@ -24,7 +25,6 @@ import {
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
 import { priorities, statuses } from '../data/data'
-import { type Task } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { tasksColumns as columns } from './tasks-columns'
 
@@ -82,11 +82,11 @@ export function TasksTable({ data }: DataTableProps) {
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     globalFilterFn: (row, _columnId, filterValue) => {
-      const id = String(row.getValue('id')).toLowerCase()
       const title = String(row.getValue('title')).toLowerCase()
+      const assignedTo = String(row.original.assigned_to ?? '').toLowerCase()
       const searchValue = String(filterValue).toLowerCase()
 
-      return id.includes(searchValue) || title.includes(searchValue)
+      return title.includes(searchValue) || assignedTo.includes(searchValue)
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -113,16 +113,16 @@ export function TasksTable({ data }: DataTableProps) {
     >
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filter by title or ID...'
+        searchPlaceholder='Rechercher par titre...'
         filters={[
           {
             columnId: 'status',
-            title: 'Status',
+            title: 'Statut',
             options: statuses,
           },
           {
             columnId: 'priority',
-            title: 'Priority',
+            title: 'Priorité',
             options: priorities,
           },
         ]}
@@ -183,7 +183,7 @@ export function TasksTable({ data }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  Aucun résultat.
                 </TableCell>
               </TableRow>
             )}

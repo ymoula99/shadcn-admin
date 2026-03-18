@@ -26,19 +26,30 @@ import { Route as ClerkAuthenticatedRouteRouteImport } from './routes/clerk/_aut
 import { Route as ClerkauthRouteRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedTransactionsIndexRouteImport } from './routes/_authenticated/transactions/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
+import { Route as AuthenticatedDevisIndexRouteImport } from './routes/_authenticated/devis/index'
+import { Route as AuthenticatedContactsIndexRouteImport } from './routes/_authenticated/contacts/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedCatalogueIndexRouteImport } from './routes/_authenticated/catalogue/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpRouteImport } from './routes/clerk/(auth)/sign-up'
 import { Route as ClerkauthSignInRouteImport } from './routes/clerk/(auth)/sign-in'
+import { Route as AuthenticatedTransactionsIdRouteImport } from './routes/_authenticated/transactions/$id'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
+import { Route as AuthenticatedSettingsIntegrationsRouteImport } from './routes/_authenticated/settings/integrations'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
+import { Route as AuthenticatedExploitationTachesIndexRouteImport } from './routes/_authenticated/exploitation/taches/index'
+import { Route as AuthenticatedExploitationDemenageursIndexRouteImport } from './routes/_authenticated/exploitation/demenageurs/index'
+import { Route as AuthenticatedExploitationChantiersIndexRouteImport } from './routes/_authenticated/exploitation/chantiers/index'
+import { Route as AuthenticatedExploitationCalendrierIndexRouteImport } from './routes/_authenticated/exploitation/calendrier/index'
+import { Route as AuthenticatedExploitationChantiersIdRouteImport } from './routes/_authenticated/exploitation/chantiers/$id'
 
 const ClerkRouteRoute = ClerkRouteRouteImport.update({
   id: '/clerk',
@@ -123,6 +134,12 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTransactionsIndexRoute =
+  AuthenticatedTransactionsIndexRouteImport.update({
+    id: '/transactions/',
+    path: '/transactions/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -140,11 +157,28 @@ const AuthenticatedHelpCenterIndexRoute =
     path: '/help-center/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDevisIndexRoute = AuthenticatedDevisIndexRouteImport.update({
+  id: '/devis/',
+  path: '/devis/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedContactsIndexRoute =
+  AuthenticatedContactsIndexRouteImport.update({
+    id: '/contacts/',
+    path: '/contacts/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCatalogueIndexRoute =
+  AuthenticatedCatalogueIndexRouteImport.update({
+    id: '/catalogue/',
+    path: '/catalogue/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
@@ -166,10 +200,22 @@ const ClerkauthSignInRoute = ClerkauthSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => ClerkauthRouteRoute,
 } as any)
+const AuthenticatedTransactionsIdRoute =
+  AuthenticatedTransactionsIdRouteImport.update({
+    id: '/transactions/$id',
+    path: '/transactions/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsNotificationsRoute =
   AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
     path: '/notifications',
+    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any)
+const AuthenticatedSettingsIntegrationsRoute =
+  AuthenticatedSettingsIntegrationsRouteImport.update({
+    id: '/integrations',
+    path: '/integrations',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
 const AuthenticatedSettingsDisplayRoute =
@@ -196,8 +242,39 @@ const AuthenticatedErrorsErrorRoute =
     path: '/errors/$error',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedExploitationTachesIndexRoute =
+  AuthenticatedExploitationTachesIndexRouteImport.update({
+    id: '/exploitation/taches/',
+    path: '/exploitation/taches/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedExploitationDemenageursIndexRoute =
+  AuthenticatedExploitationDemenageursIndexRouteImport.update({
+    id: '/exploitation/demenageurs/',
+    path: '/exploitation/demenageurs/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedExploitationChantiersIndexRoute =
+  AuthenticatedExploitationChantiersIndexRouteImport.update({
+    id: '/exploitation/chantiers/',
+    path: '/exploitation/chantiers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedExploitationCalendrierIndexRoute =
+  AuthenticatedExploitationCalendrierIndexRouteImport.update({
+    id: '/exploitation/calendrier/',
+    path: '/exploitation/calendrier/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedExploitationChantiersIdRoute =
+  AuthenticatedExploitationChantiersIdRouteImport.update({
+    id: '/exploitation/chantiers/$id',
+    path: '/exploitation/chantiers/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -210,21 +287,31 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/settings/integrations': typeof AuthenticatedSettingsIntegrationsRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/transactions/$id': typeof AuthenticatedTransactionsIdRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/apps/': typeof AuthenticatedAppsIndexRoute
+  '/catalogue/': typeof AuthenticatedCatalogueIndexRoute
+  '/chats/': typeof AuthenticatedChatsIndexRoute
+  '/contacts/': typeof AuthenticatedContactsIndexRoute
+  '/devis/': typeof AuthenticatedDevisIndexRoute
+  '/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
+  '/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/transactions/': typeof AuthenticatedTransactionsIndexRoute
+  '/users/': typeof AuthenticatedUsersIndexRoute
+  '/exploitation/chantiers/$id': typeof AuthenticatedExploitationChantiersIdRoute
+  '/exploitation/calendrier/': typeof AuthenticatedExploitationCalendrierIndexRoute
+  '/exploitation/chantiers/': typeof AuthenticatedExploitationChantiersIndexRoute
+  '/exploitation/demenageurs/': typeof AuthenticatedExploitationDemenageursIndexRoute
+  '/exploitation/taches/': typeof AuthenticatedExploitationTachesIndexRoute
 }
 export interface FileRoutesByTo {
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
@@ -243,16 +330,27 @@ export interface FileRoutesByTo {
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/settings/integrations': typeof AuthenticatedSettingsIntegrationsRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/transactions/$id': typeof AuthenticatedTransactionsIdRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/catalogue': typeof AuthenticatedCatalogueIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/contacts': typeof AuthenticatedContactsIndexRoute
+  '/devis': typeof AuthenticatedDevisIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/transactions': typeof AuthenticatedTransactionsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/exploitation/chantiers/$id': typeof AuthenticatedExploitationChantiersIdRoute
+  '/exploitation/calendrier': typeof AuthenticatedExploitationCalendrierIndexRoute
+  '/exploitation/chantiers': typeof AuthenticatedExploitationChantiersIndexRoute
+  '/exploitation/demenageurs': typeof AuthenticatedExploitationDemenageursIndexRoute
+  '/exploitation/taches': typeof AuthenticatedExploitationTachesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -276,20 +374,32 @@ export interface FileRoutesById {
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/_authenticated/settings/integrations': typeof AuthenticatedSettingsIntegrationsRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/_authenticated/transactions/$id': typeof AuthenticatedTransactionsIdRoute
   '/clerk/(auth)/sign-in': typeof ClerkauthSignInRoute
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/catalogue/': typeof AuthenticatedCatalogueIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
+  '/_authenticated/contacts/': typeof AuthenticatedContactsIndexRoute
+  '/_authenticated/devis/': typeof AuthenticatedDevisIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/_authenticated/transactions/': typeof AuthenticatedTransactionsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/exploitation/chantiers/$id': typeof AuthenticatedExploitationChantiersIdRoute
+  '/_authenticated/exploitation/calendrier/': typeof AuthenticatedExploitationCalendrierIndexRoute
+  '/_authenticated/exploitation/chantiers/': typeof AuthenticatedExploitationChantiersIndexRoute
+  '/_authenticated/exploitation/demenageurs/': typeof AuthenticatedExploitationDemenageursIndexRoute
+  '/_authenticated/exploitation/taches/': typeof AuthenticatedExploitationTachesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/clerk'
     | '/settings'
     | '/forgot-password'
@@ -302,21 +412,31 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/'
     | '/errors/$error'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
+    | '/settings/integrations'
     | '/settings/notifications'
+    | '/transactions/$id'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
     | '/clerk/user-management'
-    | '/apps'
-    | '/chats'
-    | '/help-center'
+    | '/apps/'
+    | '/catalogue/'
+    | '/chats/'
+    | '/contacts/'
+    | '/devis/'
+    | '/help-center/'
     | '/settings/'
-    | '/tasks'
-    | '/users'
+    | '/tasks/'
+    | '/transactions/'
+    | '/users/'
+    | '/exploitation/chantiers/$id'
+    | '/exploitation/calendrier/'
+    | '/exploitation/chantiers/'
+    | '/exploitation/demenageurs/'
+    | '/exploitation/taches/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/clerk'
@@ -335,16 +455,27 @@ export interface FileRouteTypes {
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
+    | '/settings/integrations'
     | '/settings/notifications'
+    | '/transactions/$id'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/catalogue'
     | '/chats'
+    | '/contacts'
+    | '/devis'
     | '/help-center'
     | '/settings'
     | '/tasks'
+    | '/transactions'
     | '/users'
+    | '/exploitation/chantiers/$id'
+    | '/exploitation/calendrier'
+    | '/exploitation/chantiers'
+    | '/exploitation/demenageurs'
+    | '/exploitation/taches'
   id:
     | '__root__'
     | '/_authenticated'
@@ -367,16 +498,27 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
+    | '/_authenticated/settings/integrations'
     | '/_authenticated/settings/notifications'
+    | '/_authenticated/transactions/$id'
     | '/clerk/(auth)/sign-in'
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
+    | '/_authenticated/catalogue/'
     | '/_authenticated/chats/'
+    | '/_authenticated/contacts/'
+    | '/_authenticated/devis/'
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
+    | '/_authenticated/transactions/'
     | '/_authenticated/users/'
+    | '/_authenticated/exploitation/chantiers/$id'
+    | '/_authenticated/exploitation/calendrier/'
+    | '/_authenticated/exploitation/chantiers/'
+    | '/_authenticated/exploitation/demenageurs/'
+    | '/_authenticated/exploitation/taches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -406,7 +548,7 @@ declare module '@tanstack/react-router' {
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -511,14 +653,21 @@ declare module '@tanstack/react-router' {
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
-      fullPath: '/users'
+      fullPath: '/users/'
       preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/transactions/': {
+      id: '/_authenticated/transactions/'
+      path: '/transactions'
+      fullPath: '/transactions/'
+      preLoaderRoute: typeof AuthenticatedTransactionsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
       path: '/tasks'
-      fullPath: '/tasks'
+      fullPath: '/tasks/'
       preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -532,21 +681,42 @@ declare module '@tanstack/react-router' {
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
-      fullPath: '/help-center'
+      fullPath: '/help-center/'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/devis/': {
+      id: '/_authenticated/devis/'
+      path: '/devis'
+      fullPath: '/devis/'
+      preLoaderRoute: typeof AuthenticatedDevisIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/contacts/': {
+      id: '/_authenticated/contacts/'
+      path: '/contacts'
+      fullPath: '/contacts/'
+      preLoaderRoute: typeof AuthenticatedContactsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
-      fullPath: '/chats'
+      fullPath: '/chats/'
       preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/catalogue/': {
+      id: '/_authenticated/catalogue/'
+      path: '/catalogue'
+      fullPath: '/catalogue/'
+      preLoaderRoute: typeof AuthenticatedCatalogueIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/apps/': {
       id: '/_authenticated/apps/'
       path: '/apps'
-      fullPath: '/apps'
+      fullPath: '/apps/'
       preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -571,11 +741,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClerkauthSignInRouteImport
       parentRoute: typeof ClerkauthRouteRoute
     }
+    '/_authenticated/transactions/$id': {
+      id: '/_authenticated/transactions/$id'
+      path: '/transactions/$id'
+      fullPath: '/transactions/$id'
+      preLoaderRoute: typeof AuthenticatedTransactionsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/notifications': {
       id: '/_authenticated/settings/notifications'
       path: '/notifications'
       fullPath: '/settings/notifications'
       preLoaderRoute: typeof AuthenticatedSettingsNotificationsRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/integrations': {
+      id: '/_authenticated/settings/integrations'
+      path: '/integrations'
+      fullPath: '/settings/integrations'
+      preLoaderRoute: typeof AuthenticatedSettingsIntegrationsRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
     '/_authenticated/settings/display': {
@@ -606,6 +790,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedErrorsErrorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/exploitation/taches/': {
+      id: '/_authenticated/exploitation/taches/'
+      path: '/exploitation/taches'
+      fullPath: '/exploitation/taches/'
+      preLoaderRoute: typeof AuthenticatedExploitationTachesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exploitation/demenageurs/': {
+      id: '/_authenticated/exploitation/demenageurs/'
+      path: '/exploitation/demenageurs'
+      fullPath: '/exploitation/demenageurs/'
+      preLoaderRoute: typeof AuthenticatedExploitationDemenageursIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exploitation/chantiers/': {
+      id: '/_authenticated/exploitation/chantiers/'
+      path: '/exploitation/chantiers'
+      fullPath: '/exploitation/chantiers/'
+      preLoaderRoute: typeof AuthenticatedExploitationChantiersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exploitation/calendrier/': {
+      id: '/_authenticated/exploitation/calendrier/'
+      path: '/exploitation/calendrier'
+      fullPath: '/exploitation/calendrier/'
+      preLoaderRoute: typeof AuthenticatedExploitationCalendrierIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exploitation/chantiers/$id': {
+      id: '/_authenticated/exploitation/chantiers/$id'
+      path: '/exploitation/chantiers/$id'
+      fullPath: '/exploitation/chantiers/$id'
+      preLoaderRoute: typeof AuthenticatedExploitationChantiersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -613,6 +832,7 @@ interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
   AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
+  AuthenticatedSettingsIntegrationsRoute: typeof AuthenticatedSettingsIntegrationsRoute
   AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
@@ -622,6 +842,8 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
     AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
     AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
+    AuthenticatedSettingsIntegrationsRoute:
+      AuthenticatedSettingsIntegrationsRoute,
     AuthenticatedSettingsNotificationsRoute:
       AuthenticatedSettingsNotificationsRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
@@ -636,22 +858,47 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedTransactionsIdRoute: typeof AuthenticatedTransactionsIdRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedCatalogueIndexRoute: typeof AuthenticatedCatalogueIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
+  AuthenticatedContactsIndexRoute: typeof AuthenticatedContactsIndexRoute
+  AuthenticatedDevisIndexRoute: typeof AuthenticatedDevisIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
+  AuthenticatedTransactionsIndexRoute: typeof AuthenticatedTransactionsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedExploitationChantiersIdRoute: typeof AuthenticatedExploitationChantiersIdRoute
+  AuthenticatedExploitationCalendrierIndexRoute: typeof AuthenticatedExploitationCalendrierIndexRoute
+  AuthenticatedExploitationChantiersIndexRoute: typeof AuthenticatedExploitationChantiersIndexRoute
+  AuthenticatedExploitationDemenageursIndexRoute: typeof AuthenticatedExploitationDemenageursIndexRoute
+  AuthenticatedExploitationTachesIndexRoute: typeof AuthenticatedExploitationTachesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedTransactionsIdRoute: AuthenticatedTransactionsIdRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedCatalogueIndexRoute: AuthenticatedCatalogueIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
+  AuthenticatedContactsIndexRoute: AuthenticatedContactsIndexRoute,
+  AuthenticatedDevisIndexRoute: AuthenticatedDevisIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
+  AuthenticatedTransactionsIndexRoute: AuthenticatedTransactionsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedExploitationChantiersIdRoute:
+    AuthenticatedExploitationChantiersIdRoute,
+  AuthenticatedExploitationCalendrierIndexRoute:
+    AuthenticatedExploitationCalendrierIndexRoute,
+  AuthenticatedExploitationChantiersIndexRoute:
+    AuthenticatedExploitationChantiersIndexRoute,
+  AuthenticatedExploitationDemenageursIndexRoute:
+    AuthenticatedExploitationDemenageursIndexRoute,
+  AuthenticatedExploitationTachesIndexRoute:
+    AuthenticatedExploitationTachesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
