@@ -24,7 +24,7 @@ export const sidebarData: SidebarData = {
   user: {
     name: 'Griffon Movers',
     email: '',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: '/images/griffon-logo.png',
   },
   teams: [
     {

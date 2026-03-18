@@ -1,119 +1,78 @@
-# Shadcn Admin Dashboard
+# Griffon CRM
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+CRM métier pour **Griffon Movers** — société de déménagement.
 
-![alt text](public/images/shadcn-admin.png)
+## Fonctionnalités
 
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
+- **Dashboard** — KPIs en temps réel : pipeline, CA global/réalisé, devis en attente, chantiers du jour
+- **Contacts** — gestion des prospects et clients, sources, historique transactions
+- **Transactions** — pipeline commercial (kanban + tableau), vue pleine page avec notes rich-text
+- **Devis** — création, envoi, catalogue produits, génération PDF + fusion brochure commerciale
+- **Exploitation** — chantiers, déménageurs, checklist, calendrier
+- **Gmail** — envoi d'emails directement depuis l'app via OAuth2
 
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
+## Stack technique
 
-> This is not a starter project (template) though. I'll probably make one in the future.
+| Couche | Technologie |
+|---|---|
+| UI | React 19 + Vite + Tailwind CSS v4 |
+| Composants | shadcn/ui (Radix UI) |
+| Routing | TanStack Router (file-based) |
+| Backend / DB | Supabase (PostgreSQL + RLS + Edge Functions) |
+| Auth | Supabase Auth |
+| PDF | pdf-lib + html2canvas |
+| Rich text | Tiptap |
+| Drag & drop | @dnd-kit |
+| Charts | Recharts |
 
-## Features
+## Démarrage
 
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global search command
-- 10+ pages
-- Extra custom components
-- RTL support
+### Prérequis
 
-<details>
-<summary>Customized Components (click to expand)</summary>
+- Node.js 18+
+- Un projet Supabase actif
 
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
-
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
-
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
-
-### Modified Components
-
-- scroll-area
-- sonner
-- separator
-
-### RTL Updated Components
-
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
-
-**Notes:**
-
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
-
-</details>
-
-## Tech Stack
-
-**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
-
-**Build Tool:** [Vite](https://vitejs.dev/)
-
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
-
-**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
-**Linting/Formatting:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
-
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
-
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
-
-## Run Locally
-
-Clone the project
+### Installation
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+npm install
 ```
 
-Go to the project directory
+### Variables d'environnement
+
+Copiez `.env.example` en `.env.local` et renseignez les valeurs :
 
 ```bash
-  cd shadcn-admin
+cp .env.example .env.local
 ```
 
-Install dependencies
+### Lancer en développement
 
 ```bash
-  pnpm install
+npm run dev
 ```
 
-Start the server
+### Build
 
 ```bash
-  pnpm run dev
+npm run build
 ```
 
-## Sponsoring this project ❤️
+## Intégration Gmail
 
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
+1. Créez un projet Google Cloud et activez l'API Gmail
+2. Créez des identifiants OAuth 2.0 (type "Application Web") avec l'URI de redirection : `https://votre-domaine.com/settings/integrations`
+3. Ajoutez `VITE_GMAIL_CLIENT_ID` dans `.env.local`
+4. Configurez les secrets Supabase Edge Functions :
+   ```bash
+   supabase secrets set GMAIL_CLIENT_ID=... GMAIL_CLIENT_SECRET=...
+   ```
+5. Connectez votre compte dans **Paramètres › Intégrations**
 
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
+## Variables d'environnement
 
-### Current Sponsor
-
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
-
-## Author
-
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
-
-## License
-
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+| Variable | Description |
+|---|---|
+| `VITE_SUPABASE_URL` | URL du projet Supabase |
+| `VITE_SUPABASE_ANON_KEY` | Clé publique Supabase |
+| `VITE_GMAIL_CLIENT_ID` | Client ID Google OAuth (facultatif) |
